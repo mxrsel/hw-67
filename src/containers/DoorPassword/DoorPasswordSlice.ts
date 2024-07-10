@@ -23,6 +23,9 @@ const DoorPasswordSlice = createSlice({
         state.input = action.payload;
       }
     },
+    removeNumber: (state) => {
+      state.input = state.input.slice(0, state.input.length - 1);
+    }
 
   }
 });

@@ -26,7 +26,6 @@ const DoorPasswordSlice = createSlice({
     removeNumber: (state) => {
       state.input = state.input.slice(0, state.input.length - 1);
     },
-
     checkStatus: (state) => {
       if (state.input === state.correctPassword) {
         state.status = 'success';
@@ -35,8 +34,16 @@ const DoorPasswordSlice = createSlice({
         state.status = 'error';
         state.message = 'Access Denied';
       }
+  },
 
+  reset: (state) => {
+    state.input = '';
+    state.status = '';
+    state.message = '';
   }
+}
+
+
 });
 
 export const doorPassword = DoorPasswordSlice.reducer;

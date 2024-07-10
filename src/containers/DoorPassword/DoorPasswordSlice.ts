@@ -17,7 +17,14 @@ const initialState: CounterState = {
 const DoorPasswordSlice = createSlice({
   name: 'doorPassword',
   initialState,
-  reducers: {}
+  reducers: {
+    addNumber: (state, action) => {
+      if (state.input.length < 4) {
+        state.input = action.payload;
+      }
+    },
+
+  }
 });
 
 export const doorPassword = DoorPasswordSlice.reducer;

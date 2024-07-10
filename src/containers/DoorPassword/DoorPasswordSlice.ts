@@ -48,3 +48,10 @@ const DoorPasswordSlice = createSlice({
 
 export const doorPassword = DoorPasswordSlice.reducer;
 
+export const {
+  addNumber,
+  removeNumber,
+  checkStatus,
+  reset,
+} = DoorPasswordSlice.actions;
+

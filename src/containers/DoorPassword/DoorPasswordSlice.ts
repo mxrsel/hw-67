@@ -1,57 +1,50 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface CounterState {
+export interface DoorPasswordState {
   input: string;
-  correctPassword: string;
-  status: string,
-  message: string,
+  status: string;
+  message: string;
 }
 
-const initialState: CounterState = {
+const initialState: DoorPasswordState = {
   input: '',
-  correctPassword: '2626',
   status: '',
-  message: '',
+  message: ''
 };
 
-const DoorPasswordSlice = createSlice({
+const correctPin = '2626';
+
+const doorPasswordSlice = createSlice({
   name: 'doorPassword',
   initialState,
   reducers: {
-    addNumber: (state, action) => {
+    addNumber: (state, action: PayloadAction<string>) => {
       if (state.input.length < 4) {
-        state.input = action.payload;
+        state.input += action.payload;
       }
     },
     removeNumber: (state) => {
-      state.input = state.input.slice(0, state.input.length - 1);
+      state.input = state.input.slice(0, -1);
     },
     checkStatus: (state) => {
-      if (state.input === state.correctPassword) {
+      if (state.input === correctPin) {
         state.status = 'success';
-        state.message = 'Access Granted';
+        state.message = 'Successfully checked your pin';
       } else {
         state.status = 'error';
-        state.message = 'Access Denied';
+        state.message = 'Wrong pin';
       }
-  },
-
-  reset: (state) => {
-    state.input = '';
-    state.status = '';
-    state.message = '';
+    },
+    resetAll: (state) => {
+      state.input = '';
+      state.status = '';
+      state.message = '';
+    }
   }
-}
-
-
 });
 
-export const doorPassword = DoorPasswordSlice.reducer;
-
-export const {
-  addNumber,
+export const { addNumber,
   removeNumber,
   checkStatus,
-  reset,
-} = DoorPasswordSlice.actions;
-
+  resetAll } = doorPasswordSlice.actions;
+export default doorPasswordSlice.reducer;
